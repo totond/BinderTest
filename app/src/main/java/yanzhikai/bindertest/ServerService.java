@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Parcel;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,6 +16,17 @@ public class ServerService extends Service {
         @Override
         public void getMsg(int type) throws RemoteException {
             Log.d(TAG, "getMsg: " + type);
+        }
+
+        @Override
+        public boolean checkMsg(int type) throws RemoteException {
+            return false;
+        }
+
+        @Override
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+            //在这里可以做权限认证，通过`Service.getCallingUid()`获取调用它的进程，判断包名是否允许执行
+            return super.onTransact(code, data, reply, flags);
         }
     };
 

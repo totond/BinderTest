@@ -6,4 +6,6 @@ package yanzhikai.bindertest;
 interface IMyAidlInterface {
 
     void getMsg(int type);
+
+    boolean checkMsg(int type);
 }
